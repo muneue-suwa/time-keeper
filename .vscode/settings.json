@@ -1,5 +1,5 @@
 {
-    "liveServer.settings.root": "/src",
+    "liveServer.settings.root": "/docs",
     "liveServer.settings.fullReload": true,
     "files.trimFinalNewlines": true,
     "files.insertFinalNewline": true
