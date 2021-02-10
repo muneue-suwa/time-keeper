@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Keeper</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row mt-3">
+            <h1 class="text-center">Time Keeper</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8 text-center">
+                <p id="timer">0:00</p>
+            </div>
+            <div class="col-4 align-items-center">
+                <button type="button" class="col-12 mt-5 btn btn-primary btn-lg">Primary</button>
+                <button type="button" class="col-12 mt-4 btn btn-primary btn-lg">Primary</button>
+                <button type="button" class="col-12 mt-4 btn btn-primary btn-lg">Primary</button>
+                <button type="button" class="col-12 mt-4 btn btn-primary btn-lg">Primary</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <h2 class="fs-3">詳細設定</h2>
+                <table class="table text-center" id="settings-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">変更内容</th>
+                            <th scope="col">分</th>
+                            <th scope="col">秒</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1回目</th>
+                            <td>
+                                <div class="input-group">
+                                    <select class="form-select" id="inputGroupSelect02">
+                                        <option selected>Choose...</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <label class="input-group-text" for="inputGroupSelect02">分</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-group">
+                                    <select class="form-select" id="inputGroupSelect02">
+                                        <option selected>Choose...</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <label class="input-group-text" for="inputGroupSelect02">秒</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2回目</th>
+                            <td>
+                                <div class="input-group">
+                                    <select class="form-select" id="inputGroupSelect02">
+                                        <option selected>Choose...</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <label class="input-group-text" for="inputGroupSelect02">分</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-group">
+                                    <select class="form-select" id="inputGroupSelect02">
+                                        <option selected>Choose...</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <label class="input-group-text" for="inputGroupSelect02">秒</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3回目</th>
+                            <td>
+                                <div class="input-group">
+                                    <select class="form-select" id="inputGroupSelect02">
+                                        <option selected>Choose...</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <label class="input-group-text" for="inputGroupSelect02">分</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-group">
+                                    <select class="form-select" id="inputGroupSelect02">
+                                        <option selected>Choose...</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <label class="input-group-text" for="inputGroupSelect02">秒</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-4">
+                <h2 class="fs-3 mb-3">ログ</h2>
+                <div class="overflow-auto bg-light" id="log-window">
+                    開始されました<br>
+                    停止しました<br>
+                    開始されました<br>
+                    停止しました<br>
+                    開始されました<br>
+                    停止しました<br>
+                    開始されました<br>
+                    停止しました<br>
+                    開始されました<br>
+                    停止しました<br>
+                    開始されました<br>
+                    停止しました<br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
