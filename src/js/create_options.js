@@ -18,6 +18,8 @@ const SELECT_TAGS = [
   ],
 ];
 
+let isCustomTime = 1;
+
 // Minutes
 for (let j = 0; j < 3; j++) {
   for (let i = 0; i < 61; i++) {
@@ -39,8 +41,10 @@ for (let j = 0; j < 3; j++) {
   }
 }
 
+// B4 time button
 B4_TIME_BUTTON.addEventListener('click', () => {
   disabledTimeSelect(true);
+  isCustomTime = 0;
   SELECT_TAGS[0][0].selectedIndex = 9;
   SELECT_TAGS[1][0].selectedIndex = 11;
   SELECT_TAGS[2][0].selectedIndex = 13;
@@ -51,8 +55,10 @@ B4_TIME_BUTTON.addEventListener('click', () => {
   LOG_WINDOW.innerText += 'B4が選択されました．\n';
 });
 
+// Mx time button
 MX_TIME_BUTTON.addEventListener('click', () => {
   disabledTimeSelect(true);
+  isCustomTime = 0;
   SELECT_TAGS[0][0].selectedIndex = 10;
   SELECT_TAGS[1][0].selectedIndex = 12;
   SELECT_TAGS[2][0].selectedIndex = 14;
@@ -63,14 +69,17 @@ MX_TIME_BUTTON.addEventListener('click', () => {
   LOG_WINDOW.innerText += 'Mxが選択されました．\n';
 });
 
+// Custom time button
 CUSTOM_TIME_BUTTON.addEventListener('click', () => {
   disabledTimeSelect(false);
+  isCustomTime = 1; // eslint-disable-line no-unused-vars
   LOG_WINDOW.innerText += 'カスタムが選択されました．時間を指定してください．\n';
 });
 
+// Detect the timer can be started
 for (let i = 0; i < 3; i++) {
   for (let j = 0; j < 2; j++) {
-    SELECT_TAGS[i][j].addEventListener('click', ()=> {
+    SELECT_TAGS[i][j].addEventListener('click', () => {
       if (isSelectedTime() === true) {
         START_STOP_BUTTON.disabled = false;
       }
@@ -92,7 +101,6 @@ function isSelectedTime() {
       }
     }
   }
-
   if (countSelected === 6) {
     return false;
   }
@@ -100,7 +108,7 @@ function isSelectedTime() {
 }
 
 /**
- * Make disable time-select
+ * Make disable or enable time-select
  *
  * @param {boolean} doDisabled
  */

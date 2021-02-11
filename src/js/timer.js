@@ -8,6 +8,7 @@ let time = 0;
 let doRunTimer = 0;
 let timerId;
 
+// Audio
 const AUDIO_FILE = new Audio('sound/Doorbell-Ding_Dong02-1.mp3');
 AUDIO_FILE.load();
 // When the audio file is loaded, start to play it.
@@ -19,6 +20,7 @@ AUDIO_FILE.addEventListener('error', () => {
   START_STOP_BUTTON.textContent = 'Error: Loading failed';
 });
 
+// Start and stop button
 START_STOP_BUTTON.addEventListener('click', () => {
   runTimer();
 });
@@ -28,12 +30,15 @@ TIMER_PARAGRAPH.addEventListener('click', () => {
   }
 });
 
+// Reset button
 RESET_BUTTON.addEventListener('click', () => {
   RESET_BUTTON.disabled = true;
   SOUND_TEST_BUTTON.disabled = false;
   START_STOP_BUTTON.disabled = false;
   disabledTimeButton(false);
-  // disabledTimeSelect(false);
+  if (isCustomTime === 1) {
+    disabledTimeSelect(false);
+  }
 
   time = 0;
   updateTimerParagraph(time);
@@ -41,6 +46,7 @@ RESET_BUTTON.addEventListener('click', () => {
   addLogMessage(time, 'リセットします．');
 });
 
+// Sound test button
 SOUND_TEST_BUTTON.addEventListener('click', () => {
   AUDIO_FILE.play();
 });
@@ -70,6 +76,7 @@ function runTimer() {
         SOUND_TEST_BUTTON.disabled = false;
         stopTimer();
         START_STOP_BUTTON.disabled = true;
+        addLogMessage(time, '終了しました．');
       }
     }, 1000);
   } else {
@@ -81,7 +88,7 @@ function runTimer() {
 
 /**
  * Update Timer Paragraph
- * @param {Integer} displayTime Current time
+ * @param {Number} displayTime Current time
  */
 function updateTimerParagraph(displayTime) {
   const [min, sec] = sec2minsec(displayTime);
@@ -131,7 +138,6 @@ function getSelectedSec() {
   }
   return [SEC_LIST, maxSec];
 }
-
 
 /**
  * Detect the current time is selected time
