@@ -122,8 +122,8 @@ function getSelectedSec() {
   const SEC_LIST = [0, 0, 0];
   let maxSec = 0;
   for (let i = 0; i < 3; i++) {
-    const MIN = Number(selectTags[i][0].value);
-    const SEC = Number(selectTags[i][1].value);
+    const MIN = Number(SELECT_TAGS[i][0].value);
+    const SEC = Number(SELECT_TAGS[i][1].value);
     SEC_LIST[i] = MIN * 60 + SEC;
     if (maxSec < SEC_LIST[i]) {
       maxSec = SEC_LIST[i];

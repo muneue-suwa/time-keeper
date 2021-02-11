@@ -3,7 +3,7 @@ const B4_TIME_BUTTON = document.getElementById('b4-time-btn');
 const MX_TIME_BUTTON = document.getElementById('mx-time-btn');
 const CUSTOM_TIME_BUTTON = document.getElementById('custom-time-btn');
 const LOG_WINDOW = document.getElementById('log-window');
-const selectTags = [
+const SELECT_TAGS = [
   [
     document.getElementById('first-min'),
     document.getElementById('first-sec'),
@@ -24,8 +24,9 @@ for (let j = 0; j < 3; j++) {
     const option = document.createElement('option');
     option.text = i;
     option.value = i;
-    selectTags[j][0].appendChild(option);
+    SELECT_TAGS[j][0].appendChild(option);
   }
+  SELECT_TAGS[j][0].selectedIndex = 0;
 }
 
 // Seconds
@@ -34,17 +35,17 @@ for (let j = 0; j < 3; j++) {
     const option = document.createElement('option');
     option.text = i;
     option.value = i;
-    selectTags[j][1].appendChild(option);
+    SELECT_TAGS[j][1].appendChild(option);
   }
 }
 
 B4_TIME_BUTTON.addEventListener('click', () => {
   disabledTimeSelect(true);
-  selectTags[0][0].selectedIndex = 9;
-  selectTags[1][0].selectedIndex = 11;
-  selectTags[2][0].selectedIndex = 13;
+  SELECT_TAGS[0][0].selectedIndex = 9;
+  SELECT_TAGS[1][0].selectedIndex = 11;
+  SELECT_TAGS[2][0].selectedIndex = 13;
   for (let i = 0; i < 3; i++) {
-    selectTags[i][1].selectedIndex = 1;
+    SELECT_TAGS[i][1].selectedIndex = 1;
   }
   START_STOP_BUTTON.disabled = false;
   LOG_WINDOW.innerText += 'B4が選択されました．\n';
@@ -52,11 +53,11 @@ B4_TIME_BUTTON.addEventListener('click', () => {
 
 MX_TIME_BUTTON.addEventListener('click', () => {
   disabledTimeSelect(true);
-  selectTags[0][0].selectedIndex = 10;
-  selectTags[1][0].selectedIndex = 12;
-  selectTags[2][0].selectedIndex = 14;
+  SELECT_TAGS[0][0].selectedIndex = 10;
+  SELECT_TAGS[1][0].selectedIndex = 12;
+  SELECT_TAGS[2][0].selectedIndex = 14;
   for (let i = 0; i < 3; i++) {
-    selectTags[i][1].selectedIndex = 1;
+    SELECT_TAGS[i][1].selectedIndex = 1;
   }
   START_STOP_BUTTON.disabled = false;
   LOG_WINDOW.innerText += 'Mxが選択されました．\n';
@@ -69,7 +70,7 @@ CUSTOM_TIME_BUTTON.addEventListener('click', () => {
 
 for (let i = 0; i < 3; i++) {
   for (let j = 0; j < 2; j++) {
-    selectTags[i][j].addEventListener('click', ()=> {
+    SELECT_TAGS[i][j].addEventListener('click', ()=> {
       if (isSelectedTime() === true) {
         START_STOP_BUTTON.disabled = false;
       }
@@ -86,7 +87,7 @@ function isSelectedTime() {
   let countSelected = 0;
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 2; j++) {
-      if (selectTags[i][j].value === '0') {
+      if (SELECT_TAGS[i][j].value === '0') {
         countSelected += 1;
       }
     }
@@ -106,7 +107,7 @@ function isSelectedTime() {
 function disabledTimeSelect(doDisabled) {
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 2; j++) {
-      selectTags[i][j].disabled = doDisabled;
+      SELECT_TAGS[i][j].disabled = doDisabled;
     }
   }
 }
