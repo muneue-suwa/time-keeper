@@ -5,7 +5,7 @@ const SOUND_TEST_BUTTON = document.getElementById('sound-test-btn');
 // const LOG_WINDOW = document.getElementById('log-window');
 
 let time = 0;
-let runTimer = 0;
+let doRunTimer = 0;
 let timerId;
 
 const AUDIO_FILE = new Audio('sound/Doorbell-Ding_Dong02-1.mp3');
@@ -20,9 +20,38 @@ AUDIO_FILE.addEventListener('error', () => {
 });
 
 START_STOP_BUTTON.addEventListener('click', () => {
-  if (runTimer == 0) {
+  runTimer();
+});
+TIMER_PARAGRAPH.addEventListener('click', () => {
+  if (START_STOP_BUTTON.disabled === false) {
+    runTimer();
+  }
+});
+
+RESET_BUTTON.addEventListener('click', () => {
+  RESET_BUTTON.disabled = true;
+  SOUND_TEST_BUTTON.disabled = false;
+  START_STOP_BUTTON.disabled = false;
+  disabledTimeButton(false);
+  disabledTimeSelect(false);
+
+  time = 0;
+  updateTimerParagraph(time);
+  clearInterval(timerId);
+  addLogMessage(time, 'リセットします．');
+});
+
+SOUND_TEST_BUTTON.addEventListener('click', () => {
+  AUDIO_FILE.play();
+});
+
+/**
+ * Start timer
+ */
+function runTimer() {
+  if (doRunTimer == 0) {
     START_STOP_BUTTON.textContent = 'Stop';
-    runTimer = 1;
+    doRunTimer = 1;
     RESET_BUTTON.disabled = true;
     SOUND_TEST_BUTTON.disabled = true;
     disabledTimeButton(true);
@@ -40,8 +69,7 @@ START_STOP_BUTTON.addEventListener('click', () => {
       if (MAX_SEC === time) {
         SOUND_TEST_BUTTON.disabled = false;
         stopTimer();
-        time = 0;
-        updateTimerParagraph(time);
+        START_STOP_BUTTON.disabled = true;
       }
     }, 1000);
   } else {
@@ -49,23 +77,7 @@ START_STOP_BUTTON.addEventListener('click', () => {
     stopTimer();
     addLogMessage(time, '停止します．');
   }
-});
-
-RESET_BUTTON.addEventListener('click', () => {
-  RESET_BUTTON.disabled = true;
-  SOUND_TEST_BUTTON.disabled = false;
-  disabledTimeButton(false);
-  disabledTimeSelect(false);
-
-  time = 0;
-  updateTimerParagraph(time);
-  clearInterval(timerId);
-  addLogMessage(time, 'リセットします．');
-});
-
-SOUND_TEST_BUTTON.addEventListener('click', () => {
-  AUDIO_FILE.play();
-});
+}
 
 /**
  * Update Timer Paragraph
@@ -95,7 +107,7 @@ function sec2minsec(currentSec) {
  */
 function stopTimer() {
   START_STOP_BUTTON.textContent = 'Start';
-  runTimer = 0;
+  doRunTimer = 0;
   RESET_BUTTON.disabled = false;
 
   clearInterval(timerId);
@@ -131,7 +143,7 @@ function getSelectedSec() {
 function isSelectedSec(selectedSec, currentSec) {
   for (let i = 0; i < 3; i++) {
     if (selectedSec[i] == currentSec) {
-      addLogMessage(time, `${i+1}回目の合図です．`);
+      addLogMessage(time, `${i + 1}回目の合図です．`);
       return true;
     }
   }
