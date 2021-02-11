@@ -1,0 +1,21 @@
+#!/bin/sh
+
+if git rev-parse --verify HEAD >/dev/null 2>&1
+then
+	against=HEAD
+else
+	# Initial commit: diff against an empty tree object
+	against=$(git hash-object -t tree /dev/null)
+fi
+
+# Redirect output to stderr.
+exec 1>&2
+
+branch=$(git rev-parse --abbrev-ref "$against")
+if test "$branch" = "release"
+then
+	echo "Could not commit to master branch"
+    exit 1
+fi
+
+exit 0
