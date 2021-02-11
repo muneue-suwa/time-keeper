@@ -2,6 +2,7 @@ const TIMER_PARAGRAPH = document.getElementById('timer');
 // const START_STOP_BUTTON = document.getElementById('start-stop-btn');
 const RESET_BUTTON = document.getElementById('reset-btn');
 const SOUND_TEST_BUTTON = document.getElementById('sound-test-btn');
+// const LOG_WINDOW = document.getElementById('log-window');
 
 let time = 0;
 let runTimer = 0;
@@ -28,6 +29,7 @@ START_STOP_BUTTON.addEventListener('click', () => {
     disabledTimeSelect(true);
     const [SELECTED_SEC_LIST, MAX_SEC] = getSelectedSec();
     console.log('SELECTED_SEC_LIST', SELECTED_SEC_LIST);
+    addLogMessage(time, '開始します．');
 
     timerId = setInterval(() => {
       time += 1;
@@ -38,11 +40,14 @@ START_STOP_BUTTON.addEventListener('click', () => {
       if (MAX_SEC === time) {
         SOUND_TEST_BUTTON.disabled = false;
         stopTimer();
+        time = 0;
+        updateTimerParagraph(time);
       }
     }, 1000);
   } else {
     SOUND_TEST_BUTTON.disabled = true;
     stopTimer();
+    addLogMessage(time, '停止します．');
   }
 });
 
@@ -55,6 +60,7 @@ RESET_BUTTON.addEventListener('click', () => {
   time = 0;
   updateTimerParagraph(time);
   clearInterval(timerId);
+  addLogMessage(time, 'リセットします．');
 });
 
 SOUND_TEST_BUTTON.addEventListener('click', () => {
@@ -66,11 +72,22 @@ SOUND_TEST_BUTTON.addEventListener('click', () => {
  * @param {Integer} displayTime Current time
  */
 function updateTimerParagraph(displayTime) {
-  const min = Math.floor(displayTime / 60) % 60;
-  const sec = displayTime % 60;
+  const [min, sec] = sec2minsec(displayTime);
   console.log(`${min}:${sec}, displayTime: ${displayTime}`);
   TIMER_PARAGRAPH.textContent =
     `${min}:${('00' + sec).slice(-2)}`;
+}
+
+/**
+ * Convert seconds to minutes and seconds
+ *
+ * @param {Number} currentSec current seconds
+ * @return {List} Minutes and Seconds
+ */
+function sec2minsec(currentSec) {
+  const min = Math.floor(currentSec / 60) % 60;
+  const sec = currentSec % 60;
+  return [min, sec];
 }
 
 /**
@@ -114,6 +131,7 @@ function getSelectedSec() {
 function isSelectedSec(selectedSec, currentSec) {
   for (let i = 0; i < 3; i++) {
     if (selectedSec[i] == currentSec) {
+      addLogMessage(time, `${i+1}回目の合図です．`);
       return true;
     }
   }
@@ -129,4 +147,15 @@ function disabledTimeButton(doDisabled) {
   B4_TIME_BUTTON.disabled = doDisabled;
   MX_TIME_BUTTON.disabled = doDisabled;
   CUSTOM_TIME_BUTTON.disabled = doDisabled;
+}
+
+/**
+ * Add log message to log window
+ *
+ * @param {Number} currentTime current time
+ * @param {String} message message
+ */
+function addLogMessage(currentTime, message) {
+  const [min, sec] = sec2minsec(currentTime);
+  LOG_WINDOW.innerText += `${min}:${('00' + sec).slice(-2)} ${message}\n`;
 }

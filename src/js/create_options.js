@@ -2,6 +2,7 @@ const START_STOP_BUTTON = document.getElementById('start-stop-btn');
 const B4_TIME_BUTTON = document.getElementById('b4-time-btn');
 const MX_TIME_BUTTON = document.getElementById('mx-time-btn');
 const CUSTOM_TIME_BUTTON = document.getElementById('custom-time-btn');
+const LOG_WINDOW = document.getElementById('log-window');
 const selectTags = [
   [
     document.getElementById('first-min'),
@@ -46,6 +47,7 @@ B4_TIME_BUTTON.addEventListener('click', () => {
     selectTags[i][1].selectedIndex = 1;
   }
   START_STOP_BUTTON.disabled = false;
+  LOG_WINDOW.innerText = 'B4が選択されました．\n';
 });
 
 MX_TIME_BUTTON.addEventListener('click', () => {
@@ -57,17 +59,19 @@ MX_TIME_BUTTON.addEventListener('click', () => {
     selectTags[i][1].selectedIndex = 1;
   }
   START_STOP_BUTTON.disabled = false;
+  LOG_WINDOW.innerText = 'Mxが選択されました．\n';
 });
 
 CUSTOM_TIME_BUTTON.addEventListener('click', () => {
   disabledTimeSelect(false);
+  LOG_WINDOW.innerText = 'カスタムが選択されました．時間を指定してください．\n';
 });
 
 for (let i = 0; i < 3; i++) {
   for (let j = 0; j < 2; j++) {
     selectTags[i][j].addEventListener('click', ()=> {
       if (isSelectedTime() === true) {
-        START_STOP_BUTTON.disabled = true;
+        START_STOP_BUTTON.disabled = false;
       }
     });
   }
