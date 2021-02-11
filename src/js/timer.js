@@ -33,7 +33,7 @@ RESET_BUTTON.addEventListener('click', () => {
   SOUND_TEST_BUTTON.disabled = false;
   START_STOP_BUTTON.disabled = false;
   disabledTimeButton(false);
-  disabledTimeSelect(false);
+  // disabledTimeSelect(false);
 
   time = 0;
   updateTimerParagraph(time);

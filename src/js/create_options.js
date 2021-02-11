@@ -47,7 +47,7 @@ B4_TIME_BUTTON.addEventListener('click', () => {
     selectTags[i][1].selectedIndex = 1;
   }
   START_STOP_BUTTON.disabled = false;
-  LOG_WINDOW.innerText = 'B4が選択されました．\n';
+  LOG_WINDOW.innerText += 'B4が選択されました．\n';
 });
 
 MX_TIME_BUTTON.addEventListener('click', () => {
@@ -59,12 +59,12 @@ MX_TIME_BUTTON.addEventListener('click', () => {
     selectTags[i][1].selectedIndex = 1;
   }
   START_STOP_BUTTON.disabled = false;
-  LOG_WINDOW.innerText = 'Mxが選択されました．\n';
+  LOG_WINDOW.innerText += 'Mxが選択されました．\n';
 });
 
 CUSTOM_TIME_BUTTON.addEventListener('click', () => {
   disabledTimeSelect(false);
-  LOG_WINDOW.innerText = 'カスタムが選択されました．時間を指定してください．\n';
+  LOG_WINDOW.innerText += 'カスタムが選択されました．時間を指定してください．\n';
 });
 
 for (let i = 0; i < 3; i++) {
