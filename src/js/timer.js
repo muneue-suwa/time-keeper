@@ -98,18 +98,6 @@ function updateTimerParagraph(displayTime) {
 }
 
 /**
- * Convert seconds to minutes and seconds
- *
- * @param {Number} currentSec current seconds
- * @return {List} Minutes and Seconds
- */
-function sec2minsec(currentSec) {
-  const min = Math.floor(currentSec / 60) % 60;
-  const sec = currentSec % 60;
-  return [min, sec];
-}
-
-/**
  * Stop timer
  */
 function stopTimer() {

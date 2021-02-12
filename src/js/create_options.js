@@ -20,6 +20,43 @@ const SELECT_TAGS = [
 
 let isCustomTime = 1;
 
+// Read settings file
+fetch('settings/time.json')
+    .then((data) => data.json())
+    .then((obj) => {
+      B4_TIME_BUTTON.disabled = false;
+      MX_TIME_BUTTON.disabled = false;
+
+      // B4 time button
+      B4_TIME_BUTTON.addEventListener('click', () => {
+        disabledTimeSelect(true);
+        isCustomTime = 0;
+        for (let i = 0; i < 3; i++) {
+          const TEMP_MIN_SEC =
+            sec2minsec(Number(obj.B4[i].min) * 60 + Number(obj.B4[i].sec));
+          SELECT_TAGS[i][0].selectedIndex = TEMP_MIN_SEC[0];
+          SELECT_TAGS[i][1].selectedIndex = TEMP_MIN_SEC[1];
+        }
+        START_STOP_BUTTON.disabled = false;
+        LOG_WINDOW.innerText += 'B4が選択されました．\n';
+      });
+
+      // Mx time button
+      MX_TIME_BUTTON.addEventListener('click', () => {
+        disabledTimeSelect(true);
+        isCustomTime = 0;
+        for (let i = 0; i < 3; i++) {
+          const TEMP_MIN_SEC =
+            sec2minsec(Number(obj.Mx[i].min) * 60 + Number(obj.Mx[i].sec));
+          SELECT_TAGS[i][0].selectedIndex = TEMP_MIN_SEC[0];
+          SELECT_TAGS[i][1].selectedIndex = TEMP_MIN_SEC[1];
+        }
+        START_STOP_BUTTON.disabled = false;
+        LOG_WINDOW.innerText += 'Mxが選択されました．\n';
+      });
+    });
+
+
 // Minutes
 for (let j = 0; j < 3; j++) {
   for (let i = 0; i < 61; i++) {
@@ -40,34 +77,6 @@ for (let j = 0; j < 3; j++) {
     SELECT_TAGS[j][1].appendChild(option);
   }
 }
-
-// B4 time button
-B4_TIME_BUTTON.addEventListener('click', () => {
-  disabledTimeSelect(true);
-  isCustomTime = 0;
-  SELECT_TAGS[0][0].selectedIndex = 9;
-  SELECT_TAGS[1][0].selectedIndex = 11;
-  SELECT_TAGS[2][0].selectedIndex = 13;
-  for (let i = 0; i < 3; i++) {
-    SELECT_TAGS[i][1].selectedIndex = 1;
-  }
-  START_STOP_BUTTON.disabled = false;
-  LOG_WINDOW.innerText += 'B4が選択されました．\n';
-});
-
-// Mx time button
-MX_TIME_BUTTON.addEventListener('click', () => {
-  disabledTimeSelect(true);
-  isCustomTime = 0;
-  SELECT_TAGS[0][0].selectedIndex = 10;
-  SELECT_TAGS[1][0].selectedIndex = 12;
-  SELECT_TAGS[2][0].selectedIndex = 14;
-  for (let i = 0; i < 3; i++) {
-    SELECT_TAGS[i][1].selectedIndex = 1;
-  }
-  START_STOP_BUTTON.disabled = false;
-  LOG_WINDOW.innerText += 'Mxが選択されました．\n';
-});
 
 // Custom time button
 CUSTOM_TIME_BUTTON.addEventListener('click', () => {
@@ -118,4 +127,16 @@ function disabledTimeSelect(doDisabled) {
       SELECT_TAGS[i][j].disabled = doDisabled;
     }
   }
+}
+
+/**
+ * Convert seconds to minutes and seconds
+ *
+ * @param {Number} originalSec current seconds
+ * @return {List} Minutes and Seconds
+ */
+function sec2minsec(originalSec) {
+  const min = Math.floor(originalSec / 60) % 60;
+  const sec = originalSec % 60;
+  return [min, sec];
 }
