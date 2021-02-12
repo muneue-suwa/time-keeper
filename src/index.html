@@ -15,14 +15,16 @@
 <body>
 
   <div class="container">
+    <!--
     <div class="row mt-3">
       <h1 class="text-center">Time Keeper</h1>
     </div>
+    -->
     <div class="row justify-content-center">
-      <div class="col-8 text-center">
+      <div class="offset-md-2 col-md-6 col-12">
         <p id="timer">0:00</p>
       </div>
-      <div class="col-4 align-items-center">
+      <div class="col-md-4 col-12 align-items-center">
         <button id="start-stop-btn" type="button" class="col-12 mt-5 btn btn-primary btn-lg" disabled>
           Sound Loading...
         </button> <!-- Start and stop button -->
@@ -31,14 +33,14 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-3">
-        <h2 class="fs-3">簡易設定</h2>
-        <button id="b4-time-btn" type="button" class="col-12 mt-4 btn btn-primary btn-lg">B4</button>
-        <button id="mx-time-btn" type="button" class="col-12 mt-4 btn btn-primary btn-lg">Mx</button>
+      <div class="col-md-3 col-12 mt-3">
+        <h2 class="fs-3 text-center">簡易設定</h2>
+        <button id="b4-time-btn" type="button" class="col-12 mt-4 btn btn-primary btn-lg" disabled>B4</button>
+        <button id="mx-time-btn" type="button" class="col-12 mt-4 btn btn-primary btn-lg" disabled>Mx</button>
         <button id="custom-time-btn" type="button" class="col-12 mt-4 btn btn-primary btn-lg">Custom</button>
       </div>
-      <div class="col-5">
-        <h2 class="fs-3">詳細設定</h2>
+      <div class="col-md-5 col-12 mt-3">
+        <h2 class="fs-3 text-center">詳細設定</h2>
         <table class="table text-center" id="settings-table">
           <thead>
             <tr>
@@ -96,8 +98,8 @@
           </tbody>
         </table>
       </div>
-      <div class="col-4">
-        <h2 class="fs-3 mb-3">ログ</h2>
+      <div class="col-md-4 col-12 mt-3">
+        <h2 class="fs-3 mb-3 text-center">ログ</h2>
         <div class="overflow-auto bg-light" id="log-window">
           初期状態です．<br>
         </div>
