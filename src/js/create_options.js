@@ -91,6 +91,8 @@ for (let i = 0; i < 3; i++) {
     SELECT_TAGS[i][j].addEventListener('click', () => {
       if (isSelectedTime() === true) {
         START_STOP_BUTTON.disabled = false;
+      } else {
+        START_STOP_BUTTON.disabled = true;
       }
     });
   }
@@ -102,15 +104,13 @@ for (let i = 0; i < 3; i++) {
  * @return {boolean} time is selected
  */
 function isSelectedTime() {
-  let countSelected = 0;
+  let totalSelectedValue = 0;
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 2; j++) {
-      if (SELECT_TAGS[i][j].value === '0') {
-        countSelected += 1;
-      }
+      totalSelectedValue += Number(SELECT_TAGS[i][j].value);
     }
   }
-  if (countSelected === 6) {
+  if (totalSelectedValue === 0) {
     return false;
   }
   return true;
