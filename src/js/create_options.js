@@ -18,7 +18,8 @@ const SELECT_TAGS = [
   ],
 ];
 
-let isCustomTime = 1;
+// カスタムか判定するためのグローバル変数
+let isCustomTime = 1; // eslint-disable-line no-unused-vars
 
 // Read settings file
 fetch('settings/time.json')
