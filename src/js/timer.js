@@ -3,6 +3,7 @@ const TIMER_PARAGRAPH = document.getElementById('timer');
 const RESET_BUTTON = document.getElementById('reset-btn');
 const SOUND_TEST_BUTTON = document.getElementById('sound-test-btn');
 // const LOG_WINDOW = document.getElementById('log-window');
+const COPY_TIME_BUTTON = document.getElementById('copy-time-btn');
 
 let time = 0;
 let doRunTimer = 0;
@@ -49,6 +50,11 @@ RESET_BUTTON.addEventListener('click', () => {
 // Sound test button
 SOUND_TEST_BUTTON.addEventListener('click', () => {
   AUDIO_FILE.play();
+});
+
+// Copy time button
+COPY_TIME_BUTTON.addEventListener('click', () => {
+  copyCurrnetTimeToClipboard();
 });
 
 /**
@@ -164,4 +170,28 @@ function disabledTimeButton(doDisabled) {
 function addLogMessage(currentTime, message) {
   const [min, sec] = sec2minsec(currentTime);
   LOG_WINDOW.innerText += `${min}:${('00' + sec).slice(-2)} ${message}\n`;
+}
+
+
+/**
+ * Copy current time to clipboard
+ */
+function copyCurrnetTimeToClipboard() {
+  const currentTime = time;
+  const [min, sec] = sec2minsec(currentTime);
+  const timeStr = `${min}:${('00' + sec).slice(-2)}`;
+  const type = 'text/plain';
+  const blob = new Blob([timeStr], {type});
+  const data = [new ClipboardItem({[type]: blob})];
+
+  navigator.clipboard.write(data).then(
+      function() {
+        console.log(`Copied!: ${timeStr}`);
+        addLogMessage(currentTime, '時間をクリップボードにコピーしました');
+      },
+      function() {
+        console.log(`Failed: Copy time to clipboard, ${timeStr}`);
+        addLogMessage(currentTime, '時間のクリップボードへのコピーが失敗しました');
+      },
+  );
 }
