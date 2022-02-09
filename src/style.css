@@ -5,3 +5,11 @@
 #log-window {
     height: 12em;
 }
+
+body {
+    font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+h2 {
+    font-weight: bolder;
+}
