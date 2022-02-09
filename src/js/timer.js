@@ -41,10 +41,10 @@ RESET_BUTTON.addEventListener('click', () => {
     disabledTimeSelect(false);
   }
 
-  time = 0;
-  updateTimerParagraph(time);
   clearInterval(timerId);
   addLogMessage(time, 'リセットします．');
+  time = 0;
+  updateTimerParagraph(time);
 });
 
 // Sound test button
