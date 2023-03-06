@@ -1,6 +1,6 @@
 # Time Keeper
 
-[![Deploy](https://github.com/muneue-suwa/time-keeper/actions/workflows/gh-pages.yml/badge.svg)](https://github.com/muneue-suwa/time-keeper/actions/workflows/gh-pages.yml)
+[![GitHub Pages Deployment](https://github.com/muneue-suwa/time-keeper/actions/workflows/gh-pages.yml/badge.svg?branch=release)](https://github.com/muneue-suwa/time-keeper/actions/workflows/gh-pages.yml)
 
 学会 or 卒業・修士論文発表用タイマー
 
