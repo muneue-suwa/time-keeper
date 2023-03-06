@@ -10,6 +10,7 @@ let doRunTimer = 0;
 let timerId;
 
 // Audio
+const AUDIO_DELAY_MSEC = 400; // Audio file delay playing multiple times
 const AUDIO_FILE = new Audio('sound/Doorbell-Ding_Dong02-1.mp3');
 AUDIO_FILE.load();
 // When the audio file is loaded, start to play it.
@@ -75,8 +76,9 @@ function runTimer() {
     timerId = setInterval(() => {
       time += 1;
       updateTimerParagraph(time);
-      if (isSelectedSec(SELECTED_SEC_LIST, time) === true) {
-        AUDIO_FILE.play();
+      const timeNum = getSelectedSecNumber(SELECTED_SEC_LIST, time);
+      if (timeNum > 0) {
+        playAudio(timeNum);
       }
       if (MAX_SEC === time) {
         SOUND_TEST_BUTTON.disabled = false;
@@ -138,16 +140,16 @@ function getSelectedSec() {
  *
  * @param {List} selectedSec
  * @param {Number} currentSec
- * @return {boolean} is selected seconds
+ * @return {Number} Number of selected time
  */
-function isSelectedSec(selectedSec, currentSec) {
+function getSelectedSecNumber(selectedSec, currentSec) {
   for (let i = 0; i < 3; i++) {
     if (selectedSec[i] == currentSec) {
       addLogMessage(time, `${i + 1}回目の合図です．`);
-      return true;
+      return i + 1;
     }
   }
-  return false;
+  return 0;
 }
 
 /**
@@ -194,4 +196,20 @@ function copyCurrnetTimeToClipboard() {
         addLogMessage(currentTime, '時間のクリップボードへのコピーが失敗しました');
       },
   );
+}
+
+/**
+ * Play audio file multiple times
+ *
+ * @param {Number} count
+ */
+function playAudio(count) {
+  let i = 0;
+  const audioIntervalId = setInterval(() => {
+    AUDIO_FILE.cloneNode(true).play();
+    if (i === count - 1) {
+      clearInterval(audioIntervalId);
+    }
+    i += 1;
+  }, AUDIO_DELAY_MSEC);
 }
